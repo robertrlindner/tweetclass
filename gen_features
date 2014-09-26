@@ -3,5 +3,5 @@
 from tweetsfeatures.tweets_features import calc_features as cf
 
 
-cf('data1k.json', components_num=5)
+cf('data1k.json', components_num=300)
 
