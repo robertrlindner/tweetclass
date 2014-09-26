@@ -62,6 +62,12 @@ Section I. Label the training data
        This is the important step where the nature of the
        classes is implicitly determined by your choices.
 
+       Be careful because a tweet can have more than one label, 
+       and therefore even if you have some "0"s and some "1"s
+       it is still possible to have  all the tweets having only
+       one label.
+       
+
 
     4.) Run: $ label_tweets
 
@@ -73,19 +79,30 @@ Section I. Label the training data
 
         It creates "ids_and_labels", the file indicating the 
         class of all tweet ids (except those few which could
-        not be parsed by JSON; see revisions)
+        not be parsed by JSON; see revisions). The format will be:
+       
+            | ID_0, [label_0] |
+            | ID_1, [label_1] |
+            | ...       ...   |
+            | ID_N, [label_N] |
+
+
+
 
 
 Section II. Extract features from training data
 -----------------------------------------------
-    (to be continued)
-    Desired format:
-    |ID1, feature vector 1|
-    |ID2, feature vector 2|
-    | ...          ...    |
-    |IDN, feature vector N|
-    
-    Creates "ids_and_features.txt"
+    1.)  Run: $ gen_features data.json
+
+        This is produce dimensionally reduced 
+        Bag-of-Words features from the JSON data.
+        File will be produced: "ids_and_features.csv" 
+        with format
+
+            | ID_0, [features_0...] |
+            | ID_1, [features_1...] |
+            | ...              ...  |
+            | ID_N, [features_N...] |
 
 
 
@@ -93,7 +110,9 @@ Section III. Generate training data:
              Design matrix "X", and feature vector "Y".
 ------------------------------------------------------
 
-    1. Run $ gen_training_data [ids_and_features] [ids_and_labels]
+    1. Run $ gen_training_data 
+
+       requires: ids_and_features.csv and  ids_and_labels.csv (see above)
 
        This will find the common IDs between the features and the
        labels and produce pure numerical representations of the
@@ -124,15 +143,23 @@ Section IV. Train the model
      five values of the the learning_rate hyperparameter 
      would look like this:
 
-      learning_rate,	n_estimators, max_depth, n_folds
-      0.1,		100,	      4,	 2
-      0.2,		100,	      4,	 2
-      0.3,		100,	      4,	 2
-      0.4,		100,	      4,	 2
-      0.5,		100,	      4,	 2
+      learning_rate,n_estimators,max_depth,n_folds
+      0.1,100,4,2                                   
+      0.2,100,4,2                                   
+      0.3,100,4,2                                   
+      0.4,100,4,2                                   
+      0.5,100,4,2
 
      After completion, a new paramfile is created with additional
      columns describing the peformance of each model.
+     The file name is a time stamp.  
+
+     To make a plot of the F1 score for the training data and
+     cross validation data as a function of learning_rate, Run:
+
+     $ plot 2014-09-25\ 21\:04\:38.187212.csv learning_rate F1-train F1-cv
+       (figure is displayed)
+
     
 
 

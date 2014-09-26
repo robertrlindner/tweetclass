@@ -7,7 +7,7 @@ labels = np.loadtxt('topic_keys_labeled.txt', usecols=[0,1], dtype='int')
 labels = dict((labels[i,1], labels[i,0]) for  i in range(labels.shape[0]))
 
 # Output
-outfile_targ = open('ids_and_labels.txt','w')
+outfile_targ = open('ids_and_labels.csv','w')
 
 docs = open('doc_topics.txt')
 
@@ -23,7 +23,7 @@ for i in range(len(lines)):
     if fractions[0] != fractions[2]:
         id = line.split('.txt')[0].split('/tweet_')[-1]
         topic = fractions[0]    
-        outfile_targ.write('{1},   {0}\n'.format(labels[topic],id) )
+        outfile_targ.write('{1},{0}\n'.format(labels[topic],id) )
 
 print 'Saving output...'
 outfile_targ.close()
