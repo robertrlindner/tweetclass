@@ -41,17 +41,18 @@ Section I. Label the training data
 ---------------------------------------
 
 1.) Obtain JSON training data.
+
 E.g., run "my_twitterstream.py" or use
 George Fisher's script to download JSON data.
 Let's call it "data.json".
 
 
-2.) Run:
+2.) Extract tweet messages.
 ```
 $ dump_tweet_text data.json
 ```
 
-This will dump all tweet message text into a 
+This will dump all tweet messages text into a 
 folder named "tweet_text" containing separate 
 files for all valid tweets.  The file names 
 are "tweet_{ID}.txt", where {ID} is the tweet ID.
@@ -60,7 +61,7 @@ The program will also make a file called:
 messages in a single file for easy data viewing.
 
 
-3.) Run: 
+3.) Load tweet messages into Mallet
 ```
 $ mallet_load_data
 ```
@@ -71,16 +72,16 @@ It expects to find the directory **tweet_text**.
 If will create the file **tweet.mallet**, which is the tweet messages
 transformed into the Mallet format.
 
-4.) Run: 
+4.) Run latent dirichlet topic modelling 
 ```
 $ mallet_topic_model
 ```
-This will run latent dirichlet topic modelling 
-on the mallet data. Takes ~15 minutes for 
-~100k tweets.  The outputs are:
+100 topics are assumed.
+Takes ~15 minutes for  ~100k tweets.  The outputs are:
 **doc_topics.txt** and **topic_keys.txt**
 
-**Important:**
+5.) Label the data
+
 Edit the **topic_keys.txt** file.
 Include a new "0th" column indicating the class as: 0  or 1.
 Save the new file as **topic_keys_labels.txt**.
@@ -88,7 +89,7 @@ This is the important step where the nature of the
 classes is implicitly determined by your choices.
 
 
-5.) Run: 
+5.) Apply the topic labels to all tweets
 ```
 $ label_tweets
 ```
@@ -154,7 +155,7 @@ I.e., design matrix and target vector
 Section IV. Train the classifier model
 --------------------------------------
 
-1.) Run: 
+1.) 
 ```
 $ bench [paramfile] [X] [Y]
 ```
