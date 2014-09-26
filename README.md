@@ -53,7 +53,7 @@ It expects to find the directory **tweet_text**.
 If will create the file **tweet.mallet**, which is the tweet messages
 transformed into the Mallet format.
 
-3.) Run: 
+4.) Run: 
 ```
 $ mallet_topic_model
 ```
@@ -70,7 +70,7 @@ This is the important step where the nature of the
 classes is implicitly determined by your choices.
 
 
-4.) Run: 
+5.) Run: 
 ```
 $ label_tweets
 ```
@@ -114,7 +114,7 @@ with format
 Section III. Generate training data
 ------------------------------------
 
-1. 
+1.)
 ```
 $ gen_training_data
 ```
@@ -136,7 +136,7 @@ I.e., design matrix and target vector
 Section IV. Train the classifier model
 --------------------------------------
 
-1. Run: 
+1.) Run: 
 ```
 $ bench [paramfile] [X] [Y]
 ```
@@ -177,7 +177,8 @@ $ plot [new param file] learning_rate F1-train F1-cv
 
 
 
-# Revisions to make:
+Revisions to make:
+--------------------
 1. Allow user to keep a trained model for use later
 
 2.  Consider how to handle these characters during
@@ -198,4 +199,4 @@ $ plot [new param file] learning_rate F1-train F1-cv
 
 6. Add meta-data features?
 
-7. Use "conversations" instead of single tweets in topic modeling (David Millis)
+7. Use "conversations" instead of single tweets in topic modeling (E.g., see previous contributions by David Millis)
