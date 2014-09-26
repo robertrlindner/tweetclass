@@ -42,53 +42,60 @@ The program will also make a file called:
 messages in a single file for easy data viewing.
 
 
-    2.) Run: 
-    ```$ mallet_load_data```
+3.) Run: 
+```
+$ mallet_load_data
+```
 
-        This will read the tweets from directory tweet_text
-        into the mallet data format.
+This will read the tweets from directory tweet_text
+into the mallet data format.
 
-        It expects to find the directory "tweet_text".
-        If will create the file "tweet.mallet", data
-        in the Mallet format.
+It expects to find the directory "tweet_text".
+If will create the file "tweet.mallet", data
+in the Mallet format.
 
 
-    3.) Run: 
-    ```$ mallet_topic_model```
+3.) Run: 
+```
+$ mallet_topic_model
+```
  
-        This will run latent dirichlet topic modelling 
-        on the mallet data. Takes ~15 minutes for 
-        100-200k tweets.  The outputs are:
+This will run latent dirichlet topic modelling 
+on the mallet data. Takes ~15 minutes for 
+~100k tweets.  The outputs are:
 
         i.)   doc_topics.txt
         ii.)  topic_keys.txt
 
-       Edit the topic_keys.txt file.
-       Include a new "0th" column indicating the class as: 0  or 1.
-       Save the new file as "topic_keys_labels.txt".
-       This is the important step where the nature of the
-       classes is implicitly determined by your choices.
+**Important:**
+Edit the topic_keys.txt file.
+Include a new "0th" column indicating the class as: 0  or 1.
+Save the new file as "topic_keys_labels.txt".
+This is the important step where the nature of the
+classes is implicitly determined by your choices.
 
 
 
 
-    4.) Run: 
-    ```$ label_tweets```
+4.) Run: 
+```
+$ label_tweets
+```
 
-        This will label all tweets in the training set.
-        It expects to find the two files:
+This will label all tweets in the training set.
+It expects to find the two files:
  
-                  1. "doc_topics.txt"
-                  2. "topic_keys_labeled.txt"
+    1. "doc_topics.txt"
+    2. "topic_keys_labeled.txt"
 
-        It creates "ids_and_labels", the file indicating the 
-        class of all tweet ids (except those few which could
-        not be parsed by JSON; see revisions). The format will be:
+It creates "ids_and_labels", the file indicating the 
+class of all tweet ids (except those few which could
+not be parsed by JSON; see revisions). The format will be:
        
-            | ID_0, [label_0] |
-            | ID_1, [label_1] |
-            | ...       ...   |
-            | ID_N, [label_N] |
+        | ID_0, [label_0] |
+        | ID_1, [label_1] |
+        | ...       ...   |
+        | ID_N, [label_N] |
 
 
 
@@ -96,13 +103,15 @@ messages in a single file for easy data viewing.
 
 Section II. Extract features from training data
 -----------------------------------------------
-    1.)  
-    ```$ gen_features data.json```
+1.)  
+```
+$ gen_features data.json
+```
 
-        This is produce dimensionally reduced 
-        Bag-of-Words features from the JSON data.
-        File will be produced: "ids_and_features.csv" 
-        with format
+This is produce dimensionally reduced 
+Bag-of-Words features from the JSON data.
+File will be produced: "ids_and_features.csv" 
+with format
 
             | ID_0, [features_0...] |
             | ID_1, [features_1...] |
@@ -115,40 +124,44 @@ Section III. Generate training data:
              Design matrix "X", and feature vector "Y".
 ------------------------------------------------------
 
-    1. 
-    ```$ gen_training_data ```
+1. 
+```
+$ gen_training_data
+```
 
-       requires: ids_and_features.csv and  ids_and_labels.csv (see above)
+(Requires: ids_and_features.csv and  ids_and_labels.csv; see above)
 
-       This will find the common IDs between the features and the
-       labels and produce pure numerical representations of the
-       design matrix X and target vector Y for training.
+This will find the common IDs between the features and the
+labels and produce pure numerical representations of the
+design matrix X and target vector Y for training.
 
-       This step in required because the features and labels
-       are as of yet as necessarily in the same order, or even
-       have the same number of rows (see "revisions" # 4).
+This step in required because the features and labels
+are as of yet as necessarily in the same order, or even
+have the same number of rows (see "revisions" # 4).
 
-       Files created: "X" and "Y"
-       I.e., design matrix and target vector
+Files created: "X" and "Y"
+I.e., design matrix and target vector
 
 
 Section IV. Train the model
 ----------------------------
 
-    1. Run: 
-    ```$ bench [paramfile] [X] [Y]```
+1. Run: 
+```
+$ bench [paramfile] [X] [Y]
+```
 
-    This will train a Gradient Boosted Decision Tree Classifier
-    (scikit-learn) on the X, Y data using the hyperparameter 
-     list set in the "paramfile".  To create the paramfile, make a 
-     CSV file with each of the hyperparameters of the model that 
-     you wish to be non-default, refer to documentation here:
+This will train a Gradient Boosted Decision Tree Classifier
+(scikit-learn) on the X, Y data using the hyperparameter 
+list set in the "paramfile".  To create the paramfile, make a 
+CSV file with each of the hyperparameters of the model that 
+you wish to be non-default, refer to documentation here:
 
      http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html
 
-     The example contents of a simple paramfile to scan over
-     five values of the the learning_rate hyperparameter 
-     would look like this:
+The example contents of a simple paramfile to scan over
+five values of the the learning_rate hyperparameter 
+would look like this:
 
       learning_rate,n_estimators,max_depth,n_folds
       0.1,100,4,2                                   
@@ -157,19 +170,17 @@ Section IV. Train the model
       0.4,100,4,2                                   
       0.5,100,4,2
 
-     After completion, a new paramfile is created with additional
-     columns describing the peformance of each model.
-     The file name is a time stamp.  
+After completion, a new paramfile is created with additional
+columns describing the peformance of each model.
+The file name is a time stamp.  
 
-     To make a plot of the F1 score for the training data and
-     cross validation data as a function of learning_rate, Run:
+To make a plot of the F1 score for the training data and
+cross validation data as a function of learning_rate, Run:
 
-     ```$ plot [new param file] learning_rate F1-train F1-cv```
+```
+$ plot [new param file] learning_rate F1-train F1-cv
+```
        (figure is displayed)
-
-    
-
-
 
 
 
