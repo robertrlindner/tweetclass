@@ -22,24 +22,24 @@ Section 0. Dependencies
 Section I. Label the training data
 ---------------------------------------
 
-    1.) Obtain JSON training data.
-        E.g., run "my_twitterstream.py" or use
-        George Fisher's script to download JSON data.
-        Let's call it "data.json".
+1.) Obtain JSON training data.
+E.g., run "my_twitterstream.py" or use
+George Fisher's script to download JSON data.
+Let's call it "data.json".
 
 
-    2.) Run:
-    ```
-    $ dump_tweet_text data.json
-    ```
+2.) Run:
+```
+$ dump_tweet_text data.json
+```
 
-        This will dump all tweet message text into a 
-        folder named "tweet_text" containing separate 
-        files for all valid tweets.  The file names 
-        are "tweet_{ID}.txt", where {ID} is the tweet ID.
-        The program will also make a file called:
-        "all_tweets.txt" which lists all IDs and text
-        messages in a single file for easy data viewing.
+This will dump all tweet message text into a 
+folder named "tweet_text" containing separate 
+files for all valid tweets.  The file names 
+are "tweet_{ID}.txt", where {ID} is the tweet ID.
+The program will also make a file called:
+"all_tweets.txt" which lists all IDs and text
+messages in a single file for easy data viewing.
 
 
     2.) Run: 
