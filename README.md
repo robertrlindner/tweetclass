@@ -7,15 +7,18 @@ Didier Dominguez
 
 Jing Mao
 
-Section 0. Dependencies
------------------------
 
+Dependencies
+--------------
 1. Python 2.7
 2. Numpy
 3. Scikit-learn
 4. mallet (http://mallet.cs.umass.edu/)
 5. Bob's Classification Benchmarker (https://github.com/rlml/ml)
 6. Didier's Bag-of-Words parser (https://github.com/ddrbcn/tweetsfeatures)
+
+Installtion
+------------
 
 
 
