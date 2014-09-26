@@ -2,18 +2,20 @@ tweetclass
 ==========
 
 Robert Lindner
+
 Didier Dominguez
+
 Jing Mao
 
 Section 0. Dependencies
 -----------------------
 
-1. Python 2.7+
+1. Python 2.7
 2. Numpy
 3. Scikit-learn
 4. mallet (http://mallet.cs.umass.edu/)
-5. Bob's Python module: ml
-6. Didier's Python module: tweetsfeatures
+5. Bob's Classification Benchmarker (https://github.com/rlml/ml)
+6. Didier's Bag-of-Words parser (https://github.com/ddrbcn/tweetsfeatures)
 
 
 
@@ -26,7 +28,8 @@ Section I. Label the training data
         Let's call it "data.json".
 
 
-    2.) Run: $ dump_tweet_text data.json 
+    2.) Run:
+    ```$ dump_tweet_text data.json```
 
         This will dump all tweet message text into a 
         folder named "tweet_text" containing separate 
@@ -37,7 +40,8 @@ Section I. Label the training data
         messages in a single file for easy data viewing.
 
 
-    2.) Run: $ mallet_load_data
+    2.) Run: 
+    ```$ mallet_load_data```
 
         This will read the tweets from directory tweet_text
         into the mallet data format.
@@ -47,7 +51,8 @@ Section I. Label the training data
         in the Mallet format.
 
 
-    3.) Run: $ mallet_topic_model
+    3.) Run: 
+    ```$ mallet_topic_model```
  
         This will run latent dirichlet topic modelling 
         on the mallet data. Takes ~15 minutes for 
@@ -62,14 +67,11 @@ Section I. Label the training data
        This is the important step where the nature of the
        classes is implicitly determined by your choices.
 
-       Be careful because a tweet can have more than one label, 
-       and therefore even if you have some "0"s and some "1"s
-       it is still possible to have  all the tweets having only
-       one label.
-       
 
 
-    4.) Run: $ label_tweets
+
+    4.) Run: 
+    ```$ label_tweets```
 
         This will label all tweets in the training set.
         It expects to find the two files:
@@ -92,7 +94,8 @@ Section I. Label the training data
 
 Section II. Extract features from training data
 -----------------------------------------------
-    1.)  Run: $ gen_features data.json
+    1.)  
+    ```$ gen_features data.json```
 
         This is produce dimensionally reduced 
         Bag-of-Words features from the JSON data.
@@ -110,7 +113,8 @@ Section III. Generate training data:
              Design matrix "X", and feature vector "Y".
 ------------------------------------------------------
 
-    1. Run $ gen_training_data 
+    1. 
+    ```$ gen_training_data ```
 
        requires: ids_and_features.csv and  ids_and_labels.csv (see above)
 
@@ -129,7 +133,8 @@ Section III. Generate training data:
 Section IV. Train the model
 ----------------------------
 
-    1. Run $ bench $ bench [paramfile] [X] [Y]
+    1. Run: 
+    ```$ bench [paramfile] [X] [Y]```
 
     This will train a Gradient Boosted Decision Tree Classifier
     (scikit-learn) on the X, Y data using the hyperparameter 
@@ -157,7 +162,7 @@ Section IV. Train the model
      To make a plot of the F1 score for the training data and
      cross validation data as a function of learning_rate, Run:
 
-     $ plot 2014-09-25\ 21\:04\:38.187212.csv learning_rate F1-train F1-cv
+     ```$ plot [new param file] learning_rate F1-train F1-cv```
        (figure is displayed)
 
     
@@ -169,21 +174,25 @@ Section IV. Train the model
 
 
 
-#Revisions to make:
-1  Consider how to handle these characters during
+# Revisions to make:
+1. Allow user to keep a trained model for use later
+
+2.  Consider how to handle these characters during
    topic modeling:
     "@", "#", "\n", numbers
 
-2   Keep "#" character in the tweet text, 
+3.   Keep "#" character in the tweet text, 
     will help with identifying hashtags?
 
-3   Mallet is removing NUMBERS, leaving the letter fragments from URLS.
+4.   Mallet is removing NUMBERS, leaving the letter fragments from URLS.
     Just remove everything after an "http"?
 
-4  Very rarely (about 1 out of 100,000 tweets) a JSON
+5.  Very rarely (about 1 out of 100,000 tweets) a JSON
    record is unable to be parsed by json.loads().
    Currently, the exception is caught and the tweet is ignored
    which is why the output file may have fewer lines than the
    original json file.  Correct this at some point...
 
-5 Allow user to keep a trained model for use later
+6. Add meta-data features?
+
+7. Use "conversations" instead of single tweets in topic modeling (David Millis)
