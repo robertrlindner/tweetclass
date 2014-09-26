@@ -47,7 +47,7 @@ George Fisher's script to download JSON data.
 Let's call it "data.json".
 
 
-2.) Extract tweet messages.
+2.)
 ```
 $ dump_tweet_text data.json
 ```
@@ -61,7 +61,7 @@ The program will also make a file called:
 messages in a single file for easy data viewing.
 
 
-3.) Load tweet messages into Mallet
+3.)
 ```
 $ mallet_load_data
 ```
@@ -72,15 +72,16 @@ It expects to find the directory **tweet_text**.
 If will create the file **tweet.mallet**, which is the tweet messages
 transformed into the Mallet format.
 
-4.) Run latent dirichlet topic modelling 
+4.) 
 ```
 $ mallet_topic_model
 ```
-100 topics are assumed.
+This will run latent dirichlet topic modelling on
+the tweet messages assuming 100 topics.
 Takes ~15 minutes for  ~100k tweets.  The outputs are:
 **doc_topics.txt** and **topic_keys.txt**
 
-5.) Label the data
+5.) Manually classify the topics
 
 Edit the **topic_keys.txt** file.
 Include a new "0th" column indicating the class as: 0  or 1.
@@ -89,11 +90,10 @@ This is the important step where the nature of the
 classes is implicitly determined by your choices.
 
 
-5.) Apply the topic labels to all tweets
+6.) 
 ```
 $ label_tweets
 ```
-
 This will label all tweets in the training set.
 It expects to find the two files: **doc_topics.txt**
 and **topic_keys_labeled.txt**.
@@ -101,11 +101,11 @@ and **topic_keys_labeled.txt**.
 It creates **ids_and_labels**, the file indicating the 
 class of all tweet ids (except those few which could
 not be parsed by JSON; see revisions). The format will be:
-       
-        | ID_0, [label_0] |
-        | ID_1, [label_1] |
-        | ...       ...   |
-        | ID_N, [label_N] |
+
+       ID_0, [label_0] 
+       ID_1, [label_1] 
+        ...       ...   
+       ID_N, [label_N] 
 
 
 
@@ -123,10 +123,10 @@ Bag-of-Words features from the JSON data.
 File will be produced: **ids_and_features.csv** 
 with format
 
-            | ID_0, [features_0...] |
-            | ID_1, [features_1...] |
-            | ...              ...  |
-            | ID_N, [features_N...] |
+       ID_0, [features_0...] 
+       ID_1, [features_1...] 
+       ...              ...  
+       ID_N, [features_N...] 
 
 
 
