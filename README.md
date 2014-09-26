@@ -111,9 +111,8 @@ with format
 
 
 
-Section III. Generate training data:
-             Design matrix **X**, and feature vector **Y**.
-------------------------------------------------------
+Section III. Generate training data
+------------------------------------
 
 1. 
 ```
@@ -134,8 +133,8 @@ Files created: **X** and **Y**
 I.e., design matrix and target vector
 
 
-Section IV. Train the model
-----------------------------
+Section IV. Train the classifier model
+--------------------------------------
 
 1. Run: 
 ```
