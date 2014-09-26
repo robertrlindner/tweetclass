@@ -14,11 +14,26 @@ Dependencies
 2. Numpy
 3. Scikit-learn
 4. mallet (http://mallet.cs.umass.edu/)
-5. Bob's Classification Benchmarker (https://github.com/rlml/ml)
-6. Didier's Bag-of-Words parser (https://github.com/ddrbcn/tweetsfeatures)
+5. Bob's Classification Benchmarker:
+```
+git clone git@github.com:rlml/ml.git
+```
+6. Didier's Bag-of-Words parser 
+```
+git clone git@github.com/ddrbcn/tweetsfeatures.git
+```
 
-Installtion
+Installation
 ------------
+Obtain the repo
+```
+$ git clone git@github.com:rlml/tweetclass.git
+```
+Install by adding the following line to
+your .bashrc or equivalent:
+```
+export PATH=/path/to/tweetclass/:$PATH
+```
 
 
 
