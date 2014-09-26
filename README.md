@@ -29,7 +29,9 @@ Section I. Label the training data
 
 
     2.) Run:
-    ```$ dump_tweet_text data.json```
+    ```
+    $ dump_tweet_text data.json
+    ```
 
         This will dump all tweet message text into a 
         folder named "tweet_text" containing separate 
