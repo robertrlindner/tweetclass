@@ -49,17 +49,14 @@ $ mallet_load_data
 
 This will read the tweets from directory **tweet_text**
 into the mallet data format.
-
 It expects to find the directory **tweet_text**.
-If will create the file **tweet.mallet**, data
-in the Mallet format.
-
+If will create the file **tweet.mallet**, which is the tweet messages
+transformed into the Mallet format.
 
 3.) Run: 
 ```
 $ mallet_topic_model
 ```
- 
 This will run latent dirichlet topic modelling 
 on the mallet data. Takes ~15 minutes for 
 ~100k tweets.  The outputs are:
@@ -71,8 +68,6 @@ Include a new "0th" column indicating the class as: 0  or 1.
 Save the new file as **topic_keys_labels.txt**.
 This is the important step where the nature of the
 classes is implicitly determined by your choices.
-
-
 
 
 4.) Run: 
