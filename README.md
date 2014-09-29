@@ -16,7 +16,7 @@ Dependencies
 4. mallet (http://mallet.cs.umass.edu/)
 5. Bob's Classification Benchmarker:
 ```
-git clone git@github.com:rlml/ml.git
+git clone git@github.com/rlml/ml.git
 ```
 6. Didier's Bag-of-Words parser 
 ```
