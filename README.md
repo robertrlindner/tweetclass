@@ -1,5 +1,10 @@
 tweetclass
 ==========
+This repository provides a self-contained environment and instructions for training a Bag of Words (+ soon Tweet metadata like No. followers, No. friends, etc.) tweet classifier.  This is an in-development prototype and we are still optimizing the algorithm in enhance performance.  Briefly, a large volume of twitter data is labeled accoding to user-input judgements of the derived *topics* in the data, which are generated using the Topic Modeling algorithm.  These assigned labels are then combined with PCA-reduced Bag-of-Words features for the training process (currently using gradient boosted regression trees).  New tweets would then to classified by applying the trained mode to new Bag of Words features.
+
+The "Classes" of the classification are arbitrary, and are only based on the judgement of the user's input during the topic modeling stage.  Therefore the pipeline is general purpose and adaptable.  Example classes might be spam/not spam or doctor/patient.
+
+
 
 Robert Lindner
 
